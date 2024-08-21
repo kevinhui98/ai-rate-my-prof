@@ -1,0 +1,171 @@
+{
+    "reviews": [{
+            "id": "1",
+            "professor": "Dr. Alice Johnson",
+            "school": "University of California, Berkeley",
+            "subject": "Computer Science",
+            "stars": 5,
+            "review": "Dr. Johnson is an amazing professor. Her lectures are clear and concise, and she is always available to help outside of class."
+        },
+        {
+            "id": "2",
+            "professor": "Dr. Robert Smith",
+            "school": "Stanford University",
+            "subject": "Mathematics",
+            "stars": 4,
+            "review": "Dr. Smith is very knowledgeable, but his lectures can be a bit fast-paced. Make sure to review the material ahead of time."
+        },
+        {
+            "id": "3",
+            "professor": "Dr. Emily Davis",
+            "school": "Massachusetts Institute of Technology",
+            "subject": "Physics",
+            "stars": 5,
+            "review": "Dr. Davis makes complex topics easy to understand. Her enthusiasm for physics is contagious!"
+        },
+        {
+            "id": "4",
+            "professor": "Dr. John Williams",
+            "school": "Harvard University",
+            "subject": "Chemistry",
+            "stars": 3,
+            "review": "Dr. Williams knows his material, but his teaching style can be a bit dry. Participation is key to staying engaged."
+        },
+        {
+            "id": "5",
+            "professor": "Dr. Linda Brown",
+            "school": "Princeton University",
+            "subject": "Philosophy",
+            "stars": 4,
+            "review": "Dr. Brown encourages deep thinking and discussion, but the workload can be intense. Be prepared to write a lot!"
+        },
+        {
+            "id": "6",
+            "professor": "Dr. Michael Miller",
+            "school": "University of Chicago",
+            "subject": "Economics",
+            "stars": 2,
+            "review": "Dr. Miller's lectures are not very engaging, and the exams are tough. Extra study sessions are a must."
+        },
+        {
+            "id": "7",
+            "professor": "Dr. Elizabeth Wilson",
+            "school": "Columbia University",
+            "subject": "History",
+            "stars": 5,
+            "review": "Dr. Wilson is an outstanding lecturer who brings history to life. Her exams are fair and reflect the material covered in class."
+        },
+        {
+            "id": "8",
+            "professor": "Dr. James Taylor",
+            "school": "Yale University",
+            "subject": "Psychology",
+            "stars": 4,
+            "review": "Dr. Taylor is passionate about psychology, but his grading can be a bit harsh. Participation and attendance are crucial."
+        },
+        {
+            "id": "9",
+            "professor": "Dr. Patricia Moore",
+            "school": "University of Pennsylvania",
+            "subject": "Sociology",
+            "stars": 3,
+            "review": "Dr. Moore is knowledgeable, but her lectures can be a bit scattered. It's important to stay organized and keep up with the readings."
+        },
+        {
+            "id": "10",
+            "professor": "Dr. David Anderson",
+            "school": "California Institute of Technology",
+            "subject": "Electrical Engineering",
+            "stars": 4,
+            "review": "Dr. Anderson's classes are challenging, but he is always willing to help students who put in the effort. Office hours are a lifesaver."
+        },
+        {
+            "id": "11",
+            "professor": "Dr. Barbara Thomas",
+            "school": "University of Michigan",
+            "subject": "Biology",
+            "stars": 5,
+            "review": "Dr. Thomas is an excellent professor who cares deeply about her students. Her lab sessions are particularly engaging."
+        },
+        {
+            "id": "12",
+            "professor": "Dr. Charles Martinez",
+            "school": "Duke University",
+            "subject": "Political Science",
+            "stars": 3,
+            "review": "Dr. Martinez's lectures are informative, but his grading criteria are not always clear. Make sure to ask for clarification when needed."
+        },
+        {
+            "id": "13",
+            "professor": "Dr. Susan White",
+            "school": "University of Texas at Austin",
+            "subject": "English Literature",
+            "stars": 4,
+            "review": "Dr. White is a great professor with a deep understanding of literature. Her feedback on essays is very helpful, but her expectations are high."
+        },
+        {
+            "id": "14",
+            "professor": "Dr. Richard Harris",
+            "school": "University of Southern California",
+            "subject": "Business Administration",
+            "stars": 2,
+            "review": "Dr. Harris's lectures are often dull, and he doesn't seem very approachable. The course material is useful, but the teaching could be improved."
+        },
+        {
+            "id": "15",
+            "professor": "Dr. Karen Lee",
+            "school": "New York University",
+            "subject": "Anthropology",
+            "stars": 4,
+            "review": "Dr. Lee is a passionate professor who engages students in thought-provoking discussions. Her assignments are challenging but rewarding."
+        },
+        {
+            "id": "16",
+            "professor": "Dr. George Clark",
+            "school": "University of Washington",
+            "subject": "Environmental Science",
+            "stars": 5,
+            "review": "Dr. Clark is an inspiring professor who motivates students to care about environmental issues. His field trips are a highlight of the course."
+        },
+        {
+            "id": "17",
+            "professor": "Dr. Maria Lopez",
+            "school": "University of Florida",
+            "subject": "Statistics",
+            "stars": 3,
+            "review": "Dr. Lopez's lectures can be a bit difficult to follow, but she is very approachable and willing to help outside of class. Practice problems are essential."
+        },
+        {
+            "id": "18",
+            "professor": "Dr. Steven Wright",
+            "school": "University of Virginia",
+            "subject": "Law",
+            "stars": 4,
+            "review": "Dr. Wright is a knowledgeable and engaging professor. His classes are demanding, but you will leave with a strong understanding of the law."
+        },
+        {
+            "id": "19",
+            "professor": "Dr. Jennifer Hall",
+            "school": "University of North Carolina at Chapel Hill",
+            "subject": "Nursing",
+            "stars": 5,
+            "review": "Dr. Hall is a compassionate and dedicated professor. She genuinely cares about her students' success and goes above and beyond to help them."
+        },
+        {
+            "id": "20",
+            "professor": "Dr. Paul Adams",
+            "school": "Ohio State University",
+            "subject": "Mechanical Engineering",
+            "stars": 3,
+            "review": "Dr. Adams is knowledgeable, but his lectures can be dry. The course is challenging, but he provides ample resources to succeed."
+        },
+        {
+            "id": "21",
+            "professor": "Dr. Laura Campbell",
+            "school": "University of Wisconsin-Madison",
+            "subject": "Linguistics",
+            "stars": 4,
+            "review": "Dr. Campbell is a fantastic professor who makes linguistics fascinating. Her exams are tough but fair, and she is always willing to help."
+        }
+    ]
+}
