@@ -2,6 +2,11 @@ import React from 'react'
 import { NextResponse } from 'next/server'
 import OpenAI from "openai"
 import { Pinecone } from '@pinecone-database/pinecone'
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+import { metadata } from '@/app/layout';
+const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY })
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 const systemPrompt = `You are an AI assistant specializing in helping students find professors based on various criteria. Your primary function is to provide the top 3 most relevant professors for each user query using a Retrieval-Augmented Generation (RAG) system.
 
 Your knowledge base includes detailed information about professors, including:
@@ -62,11 +67,88 @@ Remember, your goal is to help students make informed decisions about their cour
 //replace the url with the actually relevant information after scrape
 //upsert
 //in the embeddings, input put reviews for the ai to understand the how relevant the information is
+const extractUrl = (text) => {
+    const urlRegex = /https?:\/\/www.\.ratemyprofessors\.com\/professor\/\d]+/g
+    return text.match(urlRegex) || []
+}
+const scrapeProfessorData = async (url) => {
+    try {
+        const { response } = await axios.get(url)
+        const $ = cheerio.load(response.data)
+        const id = url.split('/')[4]
+        const professorFirstName = $('div.NameTitle__Name-dowf0z-0 span').first().text().trim()
+        const professorLastName = $('div.NameTitle__Name-dowf0z-0 span.NameTitle__LastNameWrapper-dowf0z-2').first().text().trim()
+        const professorName = `${professorFirstName} ${professorLastName}`
+        const school = $('div.NameTitle__Title-dowf0z-1').last().text().trim()
+        const subject = $('a.TeacherDepartment__StyledDepartmentLink-fl79e8-0').text().trim()
+        const ratingText = $('div.RatingValue__Numerator-qw8sqy-2').text().trim()
+        const comments = $('div.Comments__StyledComments-dzzyvm-0').text().trim()
+        const review = {
+            id: id,
+            professor: professorName,
+            reviews: comments,
+            subject: subject,
+            stars: ratingText,
+            school: school
+
+        }
+        return review;
+    } catch (e) {
+        console.log(e)
+        return null
+    }
+}
+const replaceUrl = async (text, urls, processedData) => {
+    for (let i = 0; i < urls.length; i++) {
+        text = text.replace(
+            urls[i],
+            processedData[i].metadata.professors + + " for " + processedData[i].metadata.subject + " with " + processedData[i].metadata.stars + "/5 star rating at " + processedData[i].metadata.school + " with reviews: " + processedData[i].metadata.reviews
+        );
+    }
+    return text
+}
+const upsertPC = async (text, client, PC_index) => {
+    const urls = extractUrl(text)
+    const processedData = [];
+    for (const url of urls) {
+        const data = await scrapeProfessorData(url)
+        if (!data) continue
+        try {
+            const response = await client.embeddings.create({
+                model: 'text-embedding-3-small',
+                input: data.reviews,
+                encoding_format: 'float',
+            })
+
+            const embedding = response.data[0].embedding;
+            processedData.push({
+                values: embedding,
+                id: data.id,
+                metadata: {
+                    professors: data.professor,
+                    reviews: data.reviews,
+                    school: data.school,
+                    subject: data.subject,
+                    stars: data.stars
+                }
+            })
+        } catch (e) {
+            console.log(e)
+        }
+        try {
+            await PC_index.upsert(processedData)
+            return replaceUrl(text, urls, processedData)
+
+        } catch (error) {
+            console.log(error)
+
+        }
+    }
+}
 
 export async function POST(req) {
     const data = await req.json()
-    const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY })
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+
     const index = pc.index('rag').namespace('ns1')
     const text = data[data.length - 1].content
     console.log(text)
