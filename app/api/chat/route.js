@@ -58,12 +58,18 @@ Your responses should:
 10. End with an open-ended question or offer for further assistance to encourage continued engagement.
 
 Remember, your goal is to help students make informed decisions about their course selections by providing accurate, relevant, and helpful information about professors.`
+//text.match check if the text has the url
+//replace the url with the actually relevant information after scrape
+//upsert
+//in the embeddings, input put reviews for the ai to understand the how relevant the information is
+
 export async function POST(req) {
     const data = await req.json()
     const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY })
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
     const index = pc.index('rag').namespace('ns1')
     const text = data[data.length - 1].content
+    console.log(text)
     const embedding = await openai.embeddings.create({
         model: 'text-embedding-3-small',
         input: text,

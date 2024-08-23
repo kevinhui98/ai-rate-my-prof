@@ -4,7 +4,7 @@ import { Box, Stack, TextField, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { auth } from "./firebase";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
-
+import ReactMarkdown from 'react-markdown'
 export default function Home() {
   const [messages, setMessages] = useState([
     { role: "assistant", content: "Hello! I'm the Rate My Professor support assistant. How can I help you today" },
@@ -55,7 +55,7 @@ export default function Home() {
       setUser(userCredential.user);
     } catch (error) {
       let errorMessage = "The username or password was incorrect. Please try again.";
-      
+
       if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
         errorMessage = "Incorrect username or password. Please try again.";
       } else if (error.code === "auth/invalid-email") {
@@ -119,7 +119,9 @@ export default function Home() {
                   p={3}
                   borderRadius={5}
                 >
-                  {message.content}
+                  <ReactMarkdown>
+                    {message.content}
+                  </ReactMarkdown>
                 </Box>
               </Box>
             ))}
