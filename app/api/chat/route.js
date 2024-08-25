@@ -150,9 +150,10 @@ export async function POST(req) {
     const index = pc.index('rag').namespace('ns1')
     const text = data[data.length - 1].content
     const upsertedData = await upsertPC(text, openai, index)
+    const embeddingInput = upsertedData != null ? upsertedData : text
     const embedding = await openai.embeddings.create({
         model: 'text-embedding-3-small',
-        input: upsertedData,
+        input: embeddingInput,
         encoding_format: 'float',
     })
     const results = await index.query({
