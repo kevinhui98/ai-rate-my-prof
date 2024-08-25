@@ -100,7 +100,7 @@ export default function Home() {
           ) : (
             <>
               <Button variant={'contained'} color={'primary'} onClick={handleLogin}>Login</Button>
-              <Button variant="text" onClick={() => setIsSignUp(true)}>Don't have an account? Sign Up</Button>
+              <Button variant="text" onClick={() => setIsSignUp(true)}>{`Don't have an account? Sign Up`}</Button>
             </>
           )}
         </Stack>

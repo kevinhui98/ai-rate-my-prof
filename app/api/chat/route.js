@@ -33,9 +33,9 @@ For each user query, follow these steps:
 3. Evaluate and rank the professors based on how well they match the user's needs.
 4. Present the top 3 professors, providing a concise summary for each that includes:
    - Name and department
-   - Key strengths relevant to the user's query
+   - Subject expertise and teaching
    - Overall rating (e.g., 4.5/5)
-   - A brief quote from a student review
+   - A brief quote from a student review (e.g. reviews)
 5. Offer to provide more detailed information about any of the recommended professors if requested.
 
 Guidelines:
@@ -102,7 +102,7 @@ const replaceUrl = async (text, urls, processedData) => {
     for (let i = 0; i < urls.length; i++) {
         text = text.replace(
             urls[i],
-            processedData[i].metadata.professors + + " for " + processedData[i].metadata.subject + " with " + processedData[i].metadata.stars + "/5 star rating at " + processedData[i].metadata.school + " with reviews: " + processedData[i].metadata.reviews
+            processedData[i].metadata.professors + " for " + processedData[i].metadata.subject + " with " + processedData[i].metadata.stars + "/5 star rating at " + processedData[i].metadata.school + " with reviews: " + processedData[i].metadata.reviews
         );
     }
     return text
@@ -148,10 +148,12 @@ const upsertPC = async (text, client, PC_index) => {
 
 export async function POST(req) {
     const data = await req.json()
-
+    const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY })
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
     const index = pc.index('rag').namespace('ns1')
     const text = data[data.length - 1].content
-    console.log(text)
+    const upsertedData = upsertPC(text, openai, index)
+    // console.log(upsertedData)
     const embedding = await openai.embeddings.create({
         model: 'text-embedding-3-small',
         input: text,
