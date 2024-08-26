@@ -100,7 +100,7 @@ const replaceUrl = async (text, urls, processedData) => {
     for (let i = 0; i < urls.length; i++) {
         text = text.replace(
             urls[i],
-            processedData[i].metadata.professor + " for " + processedData[i].metadata.subject + " with " + processedData[i].metadata.stars + "/5 star rating at " + processedData[i].metadata.school + " with reviews: " + processedData[i].metadata.review
+            processedData[i].id + " with name " + processedData[i].metadata.professor + " for " + processedData[i].metadata.subject + " with " + processedData[i].metadata.stars + "/5 star rating at " + processedData[i].metadata.school + " with reviews: " + processedData[i].metadata.review
         );
     }
     return text
@@ -158,7 +158,7 @@ export async function POST(req) {
     })
     const results = await index.query({
         vector: embedding.data[0].embedding,
-        topK: 3,
+        topK: 1,
         includeMetadata: true,
     })
     let resultString = '\n\nReturned results from vector db: (done automatically):'
